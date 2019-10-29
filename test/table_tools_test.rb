@@ -10,8 +10,7 @@ class TableToolsTest < Minitest::Test
     EOB
 
     df = TableTools.from_mrtable(mrtable_src)
-
-    pp df
+    # pp df
 
     assert_equal("a", df.colnames[0])
     assert_equal("b", df.colnames[1])
