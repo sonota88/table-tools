@@ -16,7 +16,7 @@ class TableToolsTest < Minitest::Test
     assert_equal("b", df.colnames[1])
 
     assert_equal("1", df.rows[0][0])
-    assert_equal(nil, df.rows[0][1])
+    assert_nil  (     df.rows[0][1])
   end
 
   def test_from_jatable
@@ -32,7 +32,7 @@ class TableToolsTest < Minitest::Test
     assert_equal("c2", df.colnames[1])
 
     assert_equal("1", df.rows[0][0])
-    assert_equal(nil, df.rows[0][1])
+    assert_nil  (     df.rows[0][1])
   end
 
 end
