@@ -16,6 +16,12 @@ module TableTools
         @rows
       )
     end
+
+    def to_jatable
+      JsonArrayTable.generate(
+        [@colnames] + @rows
+      )
+    end
   end
 
 end
