@@ -1,6 +1,13 @@
 require "table_tools/version"
+require 'table_tools/data_frame'
+
+autoload :Mrtable, 'mrtable'
 
 module TableTools
-  class Error < StandardError; end
-  # Your code goes here...
+
+  def self.from_mrtable(src)
+    colnames, rows = Mrtable.parse(src)
+    DataFrame.new(colnames, rows)
+  end
+
 end
