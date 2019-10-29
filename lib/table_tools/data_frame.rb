@@ -9,6 +9,13 @@ module TableTools
       @rows = rows
       @colnames = colnames
     end
+
+    def to_mrtable
+      Mrtable.generate(
+        @colnames,
+        @rows
+      )
+    end
   end
 
 end
