@@ -3,8 +3,17 @@ require 'json'
 
 class JsonArrayTable
 
-  def self.parse(text)
-    text.lines.map{ |line| JSON.parse(line) }
+  def self.parse(text, opts={})
+    rows = text.lines.map{ |line| JSON.parse(line) }
+
+    if opts.key?(:complement)
+      unless opts[:complement].is_a?(String) or opts[:complement].nil?
+        raise "opts[:complement] must be String or nil"
+      end
+      rows = complement(rows, opts[:complement])
+    end
+
+    rows
   end
 
   def self.generate(rows, opts={})
@@ -34,6 +43,21 @@ class JsonArrayTable
   end
 
   # private
+
+  def self.complement(rows, val)
+    num_cols_max =
+      rows
+        .map{|cols| cols.size }
+        .max
+
+    rows.map do |cols|
+      rest_cols = []
+      (num_cols_max - cols.size).times do
+        rest_cols << val
+      end
+      cols + rest_cols
+    end
+  end
 
   def self.map_col_with_ci(rows)
     rows.map do |cols|
