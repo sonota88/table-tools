@@ -30,8 +30,8 @@ class DataFrameTest < Minitest::Test
     )
 
     expected = <<-EOB
-["c1","c2"]
-["1",null]
+[ "c1" , "c2" ]
+[ "1"  , null ]
     EOB
 
     assert_equal(expected, df.to_jatable)
