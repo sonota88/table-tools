@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'test_helper'
 require 'table_tools/data_frame'
 
@@ -34,6 +35,27 @@ class DataFrameTest < Minitest::Test
     EOB
 
     assert_equal(expected, df.to_jatable)
+  end
+
+  # colnames は対象にしない方がよい？
+  def test_map_col_with_ci
+    df = TableTools::DataFrame.new(
+      ["c1", "c2"],
+      [
+        ["a", "b"]
+      ]
+    )
+
+    new_df = df.map_col_with_ci{|col, ci|
+      "#{col}:#{ci}"
+    }
+
+    expected = <<-EOB
+| c1:0 | c2:1 |
+| ---- | ---- |
+| a:0  | b:1  |
+    EOB
+    assert_equal(expected, new_df.to_mrtable)
   end
 
 end
