@@ -23,6 +23,16 @@ module TableTools
       )
     end
 
+    def rm_colname_prefix!
+      @colnames = @colnames.map{|cn|
+        if /^(.+?)\.(.+)$/ =~ cn
+          $2
+        else
+          cn
+        end
+      }
+    end
+
     # ci: column index
     # @return new data frame
     def map_col_with_ci

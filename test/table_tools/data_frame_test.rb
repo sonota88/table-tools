@@ -58,4 +58,21 @@ class DataFrameTest < Minitest::Test
     assert_equal(expected, new_df.to_mrtable)
   end
 
+  def test_rm_colname_prefix!
+    df = TableTools::DataFrame.new(
+      ["db.c1", "db.c2"],
+      [
+        ["1", nil]
+      ]
+    )
+
+    df.rm_colname_prefix!
+
+    expected = <<-EOB
+| c1  | c2  |
+| --- | --- |
+|   1 |     |
+    EOB
+    assert_equal(expected, df.to_mrtable)
+  end
 end
