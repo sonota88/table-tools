@@ -1,6 +1,6 @@
 require "table_tools/version"
 require 'table_tools/data_frame'
-require 'mrtable'
+require 'mrtable_custom'
 require 'json_array_table'
 
 module TableTools

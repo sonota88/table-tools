@@ -13,7 +13,8 @@ module TableTools
     def to_mrtable
       Mrtable.generate(
         @colnames,
-        @rows
+        @rows,
+        {}
       )
     end
 
