@@ -1,8 +1,7 @@
 require "table_tools/version"
 require 'table_tools/data_frame'
-
-autoload :Mrtable, 'mrtable'
-autoload :JsonArrayTable, 'json_array_table'
+require 'mrtable'
+require 'json_array_table'
 
 module TableTools
 
