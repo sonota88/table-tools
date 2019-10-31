@@ -15,6 +15,10 @@ module TableTools
     DataFrame.new(colnames, rows)
   end
 
+  def self.from_json_array_table(src)
+    TableTools.from_jatable(src)
+  end
+
   # TODO Use tempfile
   def self.diff_check_num_cols(df_a, df_b)
     num_cols_a = df_a.colnames.size
