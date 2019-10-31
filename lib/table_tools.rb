@@ -1,3 +1,4 @@
+# coding: utf-8
 require "table_tools/version"
 require 'table_tools/data_frame'
 require 'mrtable_custom'
@@ -10,8 +11,9 @@ module TableTools
     DataFrame.new(colnames, rows)
   end
 
+  # rows がない場合、空配列になること
   def self.from_jatable(src)
-    colnames, rows = JsonArrayTable.parse(src)
+    colnames, *rows = JsonArrayTable.parse(src)
     DataFrame.new(colnames, rows)
   end
 
