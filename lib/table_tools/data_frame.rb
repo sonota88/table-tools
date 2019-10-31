@@ -10,12 +10,16 @@ module TableTools
       @colnames = colnames
     end
 
-    def to_mrtable
-      Mrtable.generate(
-        @colnames,
-        @rows,
-        {}
-      )
+    def to_mrtable(opts = {})
+      df2 = self
+
+      if opts.has_key?(:null_str)
+        df2 = map_col_with_ci{|col, ci|
+          col.nil? ? opts[:null_str] : col
+        }
+      end
+
+      Mrtable.generate(df2.colnames, df2.rows, opts)
     end
 
     def to_jatable
