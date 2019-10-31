@@ -22,14 +22,23 @@ module TableTools
       Mrtable.generate(df2.colnames, df2.rows, opts)
     end
 
-    def to_jatable
+    def to_jatable(opts = {})
+      df2 = self
+
+      if opts.has_key?(:null_str)
+        df2 = map_col_with_ci{|col, ci|
+          col.nil? ? opts[:null_str] : col
+        }
+      end
+
       JsonArrayTable.generate(
-        [@colnames] + @rows
+        [df2.colnames] + df2.rows,
+        opts
       )
     end
 
-    def to_json_array_table
-      to_jatable
+    def to_json_array_table(opts = {})
+      to_jatable(opts)
     end
 
     def rm_colname_prefix!
