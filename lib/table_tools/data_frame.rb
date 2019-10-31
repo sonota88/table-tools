@@ -34,6 +34,14 @@ module TableTools
       }
     end
 
+    def mrtable_calc_maxlens
+      if @rows.empty?
+        @colnames.map{|it| it.size }
+      else
+        Mrtable.calc_maxlens(@colnames, @rows)
+      end
+    end
+
     # ci: column index
     # @return new data frame
     def map_col_with_ci
