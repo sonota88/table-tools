@@ -28,6 +28,10 @@ module TableTools
       )
     end
 
+    def to_json_array_table
+      to_jatable
+    end
+
     def rm_colname_prefix!
       @colnames = @colnames.map{|cn|
         if /^(.+?)\.(.+)$/ =~ cn
