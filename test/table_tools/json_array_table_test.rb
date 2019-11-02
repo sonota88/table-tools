@@ -1,6 +1,6 @@
 # coding: utf-8
 require 'test_helper'
-require 'json_array_table'
+require 'table_tools/json_array_table'
 
 class JsonArrayTableTest < Minitest::Test
 
