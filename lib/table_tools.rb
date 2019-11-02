@@ -1,7 +1,7 @@
 # coding: utf-8
 require "table_tools/version"
 require 'table_tools/data_frame'
-require 'mrtable_custom'
+require 'table_tools/mrtable_custom'
 require 'table_tools/json_array_table'
 
 module TableTools
