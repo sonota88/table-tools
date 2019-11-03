@@ -13,13 +13,13 @@ module TableTools
   end
 
   # rows がない場合、空配列になること
-  def self.from_jatable(src)
-    colnames, *rows = JsonArrayTable.parse(src)
+  def self.from_jatable(src, opts={})
+    colnames, *rows = JsonArrayTable.parse(src, opts)
     DataFrame.new(colnames, rows)
   end
 
-  def self.from_json_array_table(src)
-    TableTools.from_jatable(src)
+  def self.from_json_array_table(src, opts={})
+    TableTools.from_jatable(src, opts)
   end
 
   def self.diff(df_a, df_b, opts={})
