@@ -7,8 +7,8 @@ require 'table_tools/json_array_table'
 
 module TableTools
 
-  def self.from_mrtable(src)
-    colnames, rows = Mrtable.parse(src)
+  def self.from_mrtable(src, opts={})
+    colnames, rows = Mrtable.parse(src, opts)
     DataFrame.new(colnames, rows)
   end
 
