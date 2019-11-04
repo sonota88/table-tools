@@ -32,4 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.0"
 
   spec.add_runtime_dependency "mrtable", "0.0.4"
+  spec.add_runtime_dependency "roo", "2.8.2"
 end
