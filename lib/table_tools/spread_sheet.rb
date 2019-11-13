@@ -9,7 +9,10 @@ module TableTools
       first_rn = find_first_rn(rows)
       first_cn = find_first_cn(rows)
 
-      rows2 = filter_rows(rows, first_rn)
+      rows2 =
+        filter_rows(rows, first_rn)
+        .select { |cols| /^#/ !~ cols[0] }
+
       rows3 = filter_cols(rows2, first_cn)
 
       rows3
