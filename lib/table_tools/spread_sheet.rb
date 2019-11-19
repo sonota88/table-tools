@@ -67,38 +67,3 @@ module TableTools
     end
   end
 end
-
-
-if $0 == __FILE__
-  require 'json'
-  require 'pp'
-
-  require 'table_tools'
-
-  text = <<-'EOB'
-[ "item"     , null , ">>begin" , "d1"   , null    , null                    ]
-[ null       , null , null      , null   , null    , null                    ]
-[ "a5"       , null , null      , null   , null    , null                    ]
-[ ">>begin"  , null , 1         , 2      , 3       , 4                       ]
-[ null       , null , null      , null   , null    , null                    ]
-[ null       , null , "id"      , "name" , "memo"  , "ctime"                 ]
-[ null       , null , 1         , "aa"   , 543     , "2019-07-04 12:13:14:0" ]
-[ null       , null , 2         , "ああ" , "fdsaf" , "2019-07-04 12:13:14:0" ]
-[ "# メモ"   , null , null      , null   , null    , null                    ]
-[ null       , null , 3         , "表"   , "fdsaf" , "2019-07-04 12:13:14:0" ]
-[ ">>end"    , null , null      , null   , null    , null                    ]
-  EOB
-
-  rows_all = []
-  text.each_line{|line| rows_all << JSON.parse(line) }
-
-  rows = TableTools::SpreadSheet.extract(rows_all)
-  pp rows
-
-  df = TableTools::DataFrame.new(
-    rows[2],
-    rows[3..-1]
-  )
-
-  puts df.to_mrtable()
-end
