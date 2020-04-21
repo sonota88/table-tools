@@ -25,6 +25,27 @@ module TableTools
       end
     end
 
+    def self.replace_any(df_act, df_exp)
+      new_rows = Array.new()
+
+      df_exp.rows.each_with_index { |cols, ri|
+        cols.each_with_index { |col, ci|
+          new_rows[ri] ||= []
+          new_rows[ri][ci] =
+            if col == "(ANY)"
+              "(ANY)"
+            else
+              df_act.rows[ri][ci]
+            end
+        }
+      }
+
+      DataFrame.new(
+        df_act.colnames,
+        new_rows
+      )
+    end
+
     def self.diff(df_a, df_b, opts={})
       diff_check_num_cols(df_a, df_b)
 
@@ -36,8 +57,10 @@ module TableTools
         maxlens[i] = [maxlens_a[i], maxlens_b[i]].max
       }
 
+      df_b2 = replace_any(df_b, df_a)
+
       t_a = df_a.to_mrtable({ :maxlens => maxlens })
-      t_b = df_b.to_mrtable({ :maxlens => maxlens })
+      t_b = df_b2.to_mrtable({ :maxlens => maxlens })
 
       tmp_act = Tempfile.open("actual")
       tmp_act.print t_b
