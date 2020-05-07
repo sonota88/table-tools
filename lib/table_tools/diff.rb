@@ -3,18 +3,18 @@ require 'tempfile'
 module TableTools
   class Diff
 
-    def self.diff_check_num_cols(df_a, df_b)
-      num_cols_exp = df_a.colnames.size
-      num_cols_act = df_b.colnames.size
+    def self.diff_check_num_cols(df_exp, df_act)
+      num_cols_exp = df_exp.colnames.size
+      num_cols_act = df_act.colnames.size
 
       if num_cols_exp != num_cols_act
         file_exp = Tempfile.open("expected")
         file_act = Tempfile.open("actual")
 
-        df_a.colnames.each { |colname|
+        df_exp.colnames.each { |colname|
           file_exp.puts colname
         }
-        df_b.colnames.each { |colname|
+        df_act.colnames.each { |colname|
           file_act.puts colname
         }
 
@@ -53,26 +53,26 @@ module TableTools
       )
     end
 
-    def self.diff(df_a, df_b, opts={})
-      diff_check_num_cols(df_a, df_b)
+    def self.diff(df_exp, df_act, opts={})
+      diff_check_num_cols(df_exp, df_act)
 
-      maxlens_a = df_a.mrtable_calc_maxlens()
-      maxlens_b = df_b.mrtable_calc_maxlens()
+      maxlens_a = df_exp.mrtable_calc_maxlens()
+      maxlens_b = df_act.mrtable_calc_maxlens()
 
       maxlens = []
       (0...(maxlens_a.size)).each{|i|
         maxlens[i] = [maxlens_a[i], maxlens_b[i]].max
       }
 
-      df_b2 =
-        if df_a.rows.size == df_b.rows.size
-          replace_any(df_b, df_a)
+      df_act2 =
+        if df_exp.rows.size == df_act.rows.size
+          replace_any(df_act, df_exp)
         else
-          df_b
+          df_act
         end
 
-      t_a = df_a.to_mrtable({ :maxlens => maxlens })
-      t_b = df_b2.to_mrtable({ :maxlens => maxlens })
+      t_a = df_exp.to_mrtable({ :maxlens => maxlens })
+      t_b = df_act2.to_mrtable({ :maxlens => maxlens })
 
       tmp_act = Tempfile.open("actual")
       tmp_act.print t_b
@@ -92,10 +92,10 @@ module TableTools
     end
 
     def self.mrtable_diff(src_a, src_b, opts={})
-      df_a = TableTool.from_mrtable(src_a)
-      df_b = TableTool.from_mrtable(src_b)
+      df_exp = TableTool.from_mrtable(src_a)
+      df_act = TableTool.from_mrtable(src_b)
 
-      Diff.diff(df_a, df_b)
+      Diff.diff(df_exp, df_act)
     end
 
     C_RESET = "\e[0m"
