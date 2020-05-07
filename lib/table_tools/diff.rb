@@ -28,7 +28,7 @@ module TableTools
 
         Diff.print_color_diff(out)
 
-        raise "different column size: a(#{num_cols_exp}) b(#{num_cols_act})"
+        raise "different column size: expected(#{num_cols_exp}) actual(#{num_cols_act})"
       end
     end
 
