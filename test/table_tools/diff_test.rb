@@ -51,8 +51,6 @@ class DiffTest < Minitest::Test
       df_act
     )
 
-    text2 = text.split("\n")[3..-1].join("\n")
-
     expected = (<<-EOB).chomp
  | c1  | c2  | c3    |
  | --- | --- | ----- |
@@ -61,7 +59,10 @@ class DiffTest < Minitest::Test
 +|   2 | b   | (ANY) |
     EOB
 
-    assert_equal(expected, text2)
+    assert_equal(
+      expected,
+      _remove_diff_header(text)
+    )
   end
 
   def test_diff_replace_any_different_rows_size
@@ -85,8 +86,6 @@ class DiffTest < Minitest::Test
       df_act
     )
 
-    text2 = text.split("\n")[3..-1].join("\n")
-
     expected = (<<-EOB).chomp
  | c1  | c2  | c3    |
  | --- | --- | ----- |
@@ -95,7 +94,15 @@ class DiffTest < Minitest::Test
 +|   2 | b   |       |
     EOB
 
-    assert_equal(expected, text2, "件数が異なる場合は置換しないこと")
+    assert_equal(
+      expected,
+      _remove_diff_header(text),
+      "件数が異なる場合は置換しないこと"
+    )
+  end
+
+  def _remove_diff_header(text)
+    text.split("\n")[3..-1].join("\n")
   end
 
 end
