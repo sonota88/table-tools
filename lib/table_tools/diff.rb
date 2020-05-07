@@ -56,12 +56,12 @@ module TableTools
     def self.diff(df_exp, df_act, opts={})
       diff_check_num_cols(df_exp, df_act)
 
-      maxlens_a = df_exp.mrtable_calc_maxlens()
-      maxlens_b = df_act.mrtable_calc_maxlens()
+      maxlens_exp = df_exp.mrtable_calc_maxlens()
+      maxlens_act = df_act.mrtable_calc_maxlens()
 
       maxlens = []
-      (0...(maxlens_a.size)).each{|i|
-        maxlens[i] = [maxlens_a[i], maxlens_b[i]].max
+      (0...(maxlens_exp.size)).each{|i|
+        maxlens[i] = [maxlens_exp[i], maxlens_act[i]].max
       }
 
       df_act2 =
