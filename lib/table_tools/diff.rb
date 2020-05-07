@@ -4,10 +4,10 @@ module TableTools
   class Diff
 
     def self.diff_check_num_cols(df_a, df_b)
-      num_cols_a = df_a.colnames.size
-      num_cols_b = df_b.colnames.size
+      num_cols_exp = df_a.colnames.size
+      num_cols_act = df_b.colnames.size
 
-      if num_cols_a != num_cols_b
+      if num_cols_exp != num_cols_act
         file_exp = Tempfile.open("expected")
         file_act = Tempfile.open("actual")
 
@@ -28,7 +28,7 @@ module TableTools
 
         Diff.print_color_diff(out)
 
-        raise "different column size: a(#{num_cols_a}) b(#{num_cols_b})"
+        raise "different column size: a(#{num_cols_exp}) b(#{num_cols_act})"
       end
     end
 
