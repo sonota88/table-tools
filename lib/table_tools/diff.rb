@@ -8,23 +8,23 @@ module TableTools
       num_cols_b = df_b.colnames.size
 
       if num_cols_a != num_cols_b
-        file_a = Tempfile.open("expected")
-        file_b = Tempfile.open("actual")
+        file_exp = Tempfile.open("expected")
+        file_act = Tempfile.open("actual")
 
         df_a.colnames.each { |colname|
-          file_a.puts colname
+          file_exp.puts colname
         }
         df_b.colnames.each { |colname|
-          file_b.puts colname
+          file_act.puts colname
         }
 
-        file_b.close
-        file_a.close
+        file_act.close
+        file_exp.close
 
-        out = `diff -u "#{file_a.path}" "#{file_b.path}"`
+        out = `diff -u "#{file_exp.path}" "#{file_act.path}"`
 
-        file_b.close!
-        file_a.close!
+        file_act.close!
+        file_exp.close!
 
         Diff.print_color_diff(out)
 
