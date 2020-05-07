@@ -57,7 +57,12 @@ module TableTools
         maxlens[i] = [maxlens_a[i], maxlens_b[i]].max
       }
 
-      df_b2 = replace_any(df_b, df_a)
+      df_b2 =
+        if df_a.rows.size == df_b.rows.size
+          replace_any(df_b, df_a)
+        else
+          df_b
+        end
 
       t_a = df_a.to_mrtable({ :maxlens => maxlens })
       t_b = df_b2.to_mrtable({ :maxlens => maxlens })

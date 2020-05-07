@@ -64,4 +64,38 @@ class DiffTest < Minitest::Test
     assert_equal(expected, text2)
   end
 
+  def test_diff_replace_any_different_rows_size
+    df_exp = TableTools::DataFrame.new(
+      ["c1", "c2", "c3"],
+      [
+        ["1", "a", "(ANY)"]
+      ]
+    )
+
+    df_act = TableTools::DataFrame.new(
+      ["c1", "c2", "c3"],
+      [
+        ["1", "a", nil],
+        ["2", "b", nil]
+      ]
+    )
+
+    text = TableTools::Diff.diff(
+      df_exp,
+      df_act
+    )
+
+    text2 = text.split("\n")[3..-1].join("\n")
+
+    expected = (<<-EOB).chomp
+ | c1  | c2  | c3    |
+ | --- | --- | ----- |
+-|   1 | a   | (ANY) |
++|   1 | a   |       |
++|   2 | b   |       |
+    EOB
+
+    assert_equal(expected, text2, "件数が異なる場合は置換しないこと")
+  end
+
 end
