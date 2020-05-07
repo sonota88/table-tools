@@ -26,7 +26,7 @@ module TableTools
     end
 
     def self.replace_any(df_act, df_exp)
-      new_rows = Array.new()
+      new_rows = []
 
       df_exp.rows.each_with_index { |cols, ri|
         cols.each_with_index { |col, ci|
