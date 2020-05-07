@@ -3,22 +3,29 @@ require 'tempfile'
 module TableTools
   class Diff
 
-    # TODO Use tempfile
     def self.diff_check_num_cols(df_a, df_b)
       num_cols_a = df_a.colnames.size
       num_cols_b = df_b.colnames.size
 
       if num_cols_a != num_cols_b
-        ts = Time.now.to_i
-        file_a = "/tmp/table_tool_diff_a_#{ts}.txt"
-        file_b = "/tmp/table_tool_diff_b_#{ts}.txt"
-        open(file_a, "w"){|f|
-          df_a.colnames.each{|colname| f.puts colname }
+        file_a = Tempfile.open("expected")
+        file_b = Tempfile.open("actual")
+
+        df_a.colnames.each { |colname|
+          file_a.puts colname
         }
-        open(file_b, "w"){|f|
-          df_b.colnames.each{|colname| f.puts colname }
+        df_b.colnames.each { |colname|
+          file_b.puts colname
         }
-        out = `diff -u "#{file_a}" "#{file_b}"`
+
+        file_b.close
+        file_a.close
+
+        out = `diff -u "#{file_a.path}" "#{file_b.path}"`
+
+        file_b.close!
+        file_a.close!
+
         Diff.print_color_diff(out)
 
         raise "different column size: a(#{num_cols_a}) b(#{num_cols_b})"
