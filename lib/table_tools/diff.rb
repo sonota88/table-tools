@@ -71,14 +71,14 @@ module TableTools
           df_act
         end
 
-      t_a = df_exp.to_mrtable({ :maxlens => maxlens })
-      t_b = df_act2.to_mrtable({ :maxlens => maxlens })
+      mrt_exp = df_exp.to_mrtable({ :maxlens => maxlens })
+      mrt_act = df_act2.to_mrtable({ :maxlens => maxlens })
 
       tmp_act = Tempfile.open("actual")
-      tmp_act.print t_b
+      tmp_act.print mrt_act
 
       tmp_exp = Tempfile.open("expected")
-      tmp_exp.print t_a
+      tmp_exp.print mrt_exp
 
       tmp_act.close
       tmp_exp.close
@@ -91,9 +91,9 @@ module TableTools
       out
     end
 
-    def self.mrtable_diff(src_a, src_b, opts={})
-      df_exp = TableTool.from_mrtable(src_a)
-      df_act = TableTool.from_mrtable(src_b)
+    def self.mrtable_diff(mrt_exp, mrt_act, opts={})
+      df_exp = TableTool.from_mrtable(mrt_exp)
+      df_act = TableTool.from_mrtable(mrt_act)
 
       Diff.diff(df_exp, df_act)
     end
