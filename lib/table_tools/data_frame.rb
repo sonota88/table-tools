@@ -78,6 +78,28 @@ module TableTools
       DataFrame.new(new_colnames, new_rows)
     end
 
+    def select_cols
+      selected_cis = []
+      @colnames.each_with_index do |colname, ci|
+        values = rows.map { |cols| cols[ci] }
+        if yield(colname, values)
+          selected_cis << ci
+        end
+      end
+
+      new_colnames =
+        selected_cis.map { |ci| @colnames[ci] }
+
+      new_rows = Array.new(@rows.size) { |i| [] }
+      selected_cis.each do |ci|
+        @rows.each_with_index { |cols, ri|
+          new_rows[ri] << cols[ci]
+        }
+      end
+
+      DataFrame.new(new_colnames, new_rows)
+    end
+
   end
 
 end

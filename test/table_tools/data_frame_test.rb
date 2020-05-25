@@ -58,6 +58,28 @@ class DataFrameTest < Minitest::Test
     assert_equal(expected, new_df.to_mrtable)
   end
 
+  def test_select_cols
+    df = TableTools::DataFrame.new(
+      ["c1", "c2", "c3", "c4"],
+      [
+        ["11", "12", "13", "14"],
+        ["21", "22", "23", "24"],
+      ]
+    )
+
+    new_df = df.select_cols do |colname, values|
+      ["c2", "c3"].include?(colname)
+    end
+
+    expected = <<-EOB
+| c2  | c3  |
+| --- | --- |
+|  12 |  13 |
+|  22 |  23 |
+    EOB
+    assert_equal(expected, new_df.to_mrtable)
+  end
+
   def test_rm_colname_prefix!
     df = TableTools::DataFrame.new(
       ["db.c1", "db.c2"],
