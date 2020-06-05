@@ -1,5 +1,5 @@
 # coding: utf-8
-require 'mrtable'
+require "mrtable"
 
 module Mrtable
 

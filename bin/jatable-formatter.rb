@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(
   File.join(__dir__, "../lib")
 )
 
-require 'table_tools'
+require "table_tools"
 
 src = $stdin.read
 

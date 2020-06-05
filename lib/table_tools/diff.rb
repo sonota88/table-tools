@@ -1,4 +1,4 @@
-require 'tempfile'
+require "tempfile"
 
 module TableTools
   class Diff

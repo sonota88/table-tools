@@ -1,6 +1,6 @@
 # coding: utf-8
-require 'test_helper'
-require 'table_tools/diff'
+require "test_helper"
+require "table_tools/diff"
 
 class DiffTest < Minitest::Test
 

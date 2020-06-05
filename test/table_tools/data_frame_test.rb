@@ -1,6 +1,6 @@
 # coding: utf-8
-require 'test_helper'
-require 'table_tools/data_frame'
+require "test_helper"
+require "table_tools/data_frame"
 
 class DataFrameTest < Minitest::Test
 

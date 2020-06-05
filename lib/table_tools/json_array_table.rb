@@ -1,5 +1,5 @@
 # coding: utf-8
-require 'json'
+require "json"
 
 class JsonArrayTable
 

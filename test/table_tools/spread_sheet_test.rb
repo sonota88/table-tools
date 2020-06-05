@@ -1,6 +1,6 @@
 # coding: utf-8
-require 'test_helper'
-require 'table_tools/spread_sheet'
+require "test_helper"
+require "table_tools/spread_sheet"
 
 class DataFrameTest < Minitest::Test
 
