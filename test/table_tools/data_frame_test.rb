@@ -46,7 +46,7 @@ class DataFrameTest < Minitest::Test
       ]
     )
 
-    new_df = df.map_col_with_ci{|col, ci|
+    new_df = df.map_col_with_ci{ |col, ci|
       "#{col}:#{ci}"
     }
 

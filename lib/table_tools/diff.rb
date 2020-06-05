@@ -60,7 +60,7 @@ module TableTools
       maxlens_act = df_act.mrtable_calc_maxlens()
 
       maxlens = []
-      (0...(maxlens_exp.size)).each{|i|
+      (0...(maxlens_exp.size)).each{ |i|
         maxlens[i] = [maxlens_exp[i], maxlens_act[i]].max
       }
 
@@ -105,7 +105,7 @@ module TableTools
 
     def self.print_color_diff(text)
       lines = text.split("\n", -1)
-      lines.each{|line|
+      lines.each{ |line|
         color = case line
                 when /^@@/ ; C_BLUE
                 when /^\-/ ; C_RED

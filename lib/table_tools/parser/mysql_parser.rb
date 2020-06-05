@@ -6,12 +6,12 @@ module TableTools
         lines = src.split("\n")
         rows =
           lines
-            .select{|line| /^\+\-/ !~ line }
-            .map{|line|
+            .select{ |line| /^\+\-/ !~ line }
+            .map{ |line|
               cols = " #{line} ".split(" | ")
               cols
-                .map{|col| col.strip }[1..-1]
-                .map{|col| col == "NULL" ? nil : col }
+                .map{ |col| col.strip }[1..-1]
+                .map{ |col| col == "NULL" ? nil : col }
             }
         head = rows[0]
         [head] + rows[1..-1]

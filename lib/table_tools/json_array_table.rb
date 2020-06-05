@@ -47,7 +47,7 @@ class JsonArrayTable
   def self.complement(rows, val)
     num_cols_max =
       rows
-        .map{|cols| cols.size }
+        .map{ |cols| cols.size }
         .max
 
     rows.map do |cols|

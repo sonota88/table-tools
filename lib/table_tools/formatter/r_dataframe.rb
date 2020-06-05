@@ -4,12 +4,12 @@ module TableTools
       def self.format(colnames, rows)
         s = "data.frame("
 
-        colnames.each_with_index{|cn, i|
+        colnames.each_with_index{ |cn, i|
           head = (i == 0) ? "  " : "  ,"
 
-          values = rows.map{|cols|
+          values = rows.map{ |cols|
             cols[i]
-          }.map{|col|
+          }.map{ |col|
             col.nil? ? "NA" : '"' + col + '"'
           }.join(", ")
 
