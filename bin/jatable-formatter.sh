@@ -12,11 +12,4 @@ _print_this_dir() {
 
 __dir__="$(_print_this_dir)"
 
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
-
-rbenv shell $(cat ${__dir__}/../.ruby-version)
-
-export BUNDLE_GEMFILE=${__dir__}/../Gemfile
-
-bundle exec ${__dir__}/jatable-formatter.rb "$@"
+${__dir__}/bundle_exec.sh ${__dir__}/jatable-formatter.rb "$@"

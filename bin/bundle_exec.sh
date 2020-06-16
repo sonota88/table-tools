@@ -12,4 +12,11 @@ _print_this_dir() {
 
 __dir__="$(_print_this_dir)"
 
-${__dir__}/bundle_exec.sh ${__dir__}/mrtable-formatter.rb "$@"
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+
+rbenv shell $(cat ${__dir__}/../.ruby-version)
+
+export BUNDLE_GEMFILE=${__dir__}/../Gemfile
+
+bundle exec "$@"

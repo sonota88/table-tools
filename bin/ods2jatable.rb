@@ -2,7 +2,7 @@
 
 require "json"
 
-require "bundler/setup"
+# require "bundler/setup"
 require "roo"
 
 file = ARGV.shift

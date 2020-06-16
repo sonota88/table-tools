@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "bundler/setup"
+# require "bundler/setup"
 require "table_tools"
 
 src = $stdin.read
