@@ -48,7 +48,8 @@
             (table-tools:mrtable:row-line-p)
             (not (table-tools:first-line-p)))
       (forward-line -1))
-    (forward-line)
+    (if (not (table-tools:first-line-p))
+        (forward-line))
     (beginning-of-line)
     (point)))
 
@@ -93,7 +94,8 @@
             (table-tools:array-table:row-line-p)
             (not (table-tools:first-line-p)))
       (forward-line -1))
-    (forward-line)
+    (if (not (table-tools:first-line-p))
+        (forward-line))
     (beginning-of-line)
     (point)))
 
