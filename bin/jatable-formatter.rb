@@ -1,9 +1,6 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH.unshift(
-  File.join(__dir__, "../lib")
-)
-
+require "bundler/setup"
 require "table_tools"
 
 src = $stdin.read
