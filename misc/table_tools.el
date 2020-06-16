@@ -28,27 +28,6 @@
     (end-of-line)
     (eobp)))
 
-(defun table-tools:search-beg ()
-  (save-excursion
-    (while (and
-            (table-tools:mrtable:row-line-p)
-            (not (table-tools:first-line-p)))
-      (forward-line -1))
-    (forward-line)
-    (beginning-of-line)
-    (point)))
-
-; 最後の行末の改行まで含む
-; （ただし、バッファ終端の場合は末尾改行なし）
-(defun table-tools:search-end ()
-  (save-excursion
-    (while (and (table-tools:mrtable:row-line-p)
-                (not (table-tools:last-line-p)))
-      (forward-line))
-    (when (table-tools:last-line-p)
-      (end-of-line))
-    (point)))
-
 ;; --------------------------------
 ;; mrtable
 
@@ -63,12 +42,33 @@
       (setq end (looking-at "|")))
     (and beg end)))
 
+(defun table-tools:mrtable:search-beg ()
+  (save-excursion
+    (while (and
+            (table-tools:mrtable:row-line-p)
+            (not (table-tools:first-line-p)))
+      (forward-line -1))
+    (forward-line)
+    (beginning-of-line)
+    (point)))
+
+; 最後の行末の改行まで含む
+; （ただし、バッファ終端の場合は末尾改行なし）
+(defun table-tools:mrtable:search-end ()
+  (save-excursion
+    (while (and (table-tools:mrtable:row-line-p)
+                (not (table-tools:last-line-p)))
+      (forward-line))
+    (when (table-tools:last-line-p)
+      (end-of-line))
+    (point)))
+
 (defun table-tools:mrtable:format ()
   (if (table-tools:mrtable:row-line-p)
       (save-excursion
         (shell-command-on-region
-         (table-tools:search-beg)
-         (table-tools:search-end)
+         (table-tools:mrtable:search-beg)
+         (table-tools:mrtable:search-end)
          (table-tools:mrtable:formatter-path)
          nil t))
     (message "not in mrtable")))
@@ -87,12 +87,33 @@
       (setq end (looking-at "\\]")))
     (and beg end)))
 
+(defun table-tools:array-table:search-beg ()
+  (save-excursion
+    (while (and
+            (table-tools:array-table:row-line-p)
+            (not (table-tools:first-line-p)))
+      (forward-line -1))
+    (forward-line)
+    (beginning-of-line)
+    (point)))
+
+; 最後の行末の改行まで含む
+; （ただし、バッファ終端の場合は末尾改行なし）
+(defun table-tools:array-table:search-end ()
+  (save-excursion
+    (while (and (table-tools:array-table:row-line-p)
+                (not (table-tools:last-line-p)))
+      (forward-line))
+    (when (table-tools:last-line-p)
+      (end-of-line))
+    (point)))
+
 (defun table-tools:array-table:format ()
   (if (table-tools:array-table:row-line-p)
       (save-excursion
         (shell-command-on-region
-         (table-tools:search-beg)
-         (table-tools:search-end)
+         (table-tools:array-table:search-beg)
+         (table-tools:array-table:search-end)
          (table-tools:array-table:formatter-path)
          nil t))
     (message "not in array table")))
