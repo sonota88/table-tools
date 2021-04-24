@@ -4,7 +4,7 @@ require "json"
 class JsonArrayTable
 
   def self.parse(text, opts={})
-    rows = text.lines.map{ |line| JSON.parse(line) }
+    rows = text.lines.map { |line| JSON.parse(line) }
 
     if opts.key?(:complement)
       unless opts[:complement].is_a?(String) or opts[:complement].nil?
@@ -47,7 +47,7 @@ class JsonArrayTable
   def self.complement(rows, val)
     num_cols_max =
       rows
-        .map{ |cols| cols.size }
+        .map { |cols| cols.size }
         .max
 
     rows.map do |cols|
@@ -70,7 +70,7 @@ class JsonArrayTable
 
   def self.col_len_max(rows, ci)
     rows
-      .map{ |cols| col_len(cols[ci]) }
+      .map { |cols| col_len(cols[ci]) }
       .max
   end
 
@@ -81,7 +81,7 @@ class JsonArrayTable
 
   def self.col_len(col)
     col.chars
-      .map{ |ci| hankaku?(col[ci]) ? 1 : 2 }
+      .map { |ci| hankaku?(col[ci]) ? 1 : 2 }
       .sum
   end
 

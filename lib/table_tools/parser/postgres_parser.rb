@@ -5,12 +5,12 @@ module TableTools
         lines = src.split("\n")
         rows =
           lines
-            .select{ |line| /^ / =~ line }
-            .map{ |line|
+            .select { |line| /^ / =~ line }
+            .map { |line|
               cols = line.split(" | ")
               cols
-                .map{ |col| col.strip }
-                .map{ |col| col == "NULL" ? nil : col }
+                .map { |col| col.strip }
+                .map { |col| col == "NULL" ? nil : col }
             }
         rows
       end

@@ -14,7 +14,7 @@ module TableTools
       df2 = self
 
       if opts.has_key?(:null_str)
-        df2 = map_col_with_ci{ |col, ci|
+        df2 = map_col_with_ci { |col, ci|
           col.nil? ? opts[:null_str] : col
         }
       end
@@ -26,7 +26,7 @@ module TableTools
       df2 = self
 
       if opts.has_key?(:null_str)
-        df2 = map_col_with_ci{ |col, ci|
+        df2 = map_col_with_ci { |col, ci|
           col.nil? ? opts[:null_str] : col
         }
       end
@@ -42,7 +42,7 @@ module TableTools
     end
 
     def rm_colname_prefix!
-      @colnames = @colnames.map{ |cn|
+      @colnames = @colnames.map { |cn|
         if /^(.+?)\.(.+)$/ =~ cn
           $2
         else
@@ -53,7 +53,7 @@ module TableTools
 
     def mrtable_calc_maxlens
       if @rows.empty?
-        @colnames.map{ |it| it.size }
+        @colnames.map { |it| it.size }
       else
         Mrtable.calc_maxlens(@colnames, @rows)
       end
