@@ -5,7 +5,6 @@ require "table_tools/spread_sheet"
 class DataFrameTest < Minitest::Test
 
   def test_to_mrtable
-
     text = <<-'EOB'
 [ "item"     , null , ">>begin" , "d1"   , null    , null                    ]
 [ null       , null , null      , null   , null    , null                    ]
