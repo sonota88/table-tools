@@ -28,9 +28,6 @@ class DataFrameTest < Minitest::Test
       rows[3..-1]
     )
 
-    
-
-
     actual = rows
              .map { |cols| JSON.generate(cols) + "\n" }
              .join("")
