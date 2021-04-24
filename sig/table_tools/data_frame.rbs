@@ -1,0 +1,5 @@
+module TableTools
+  class DataFrame
+    def select_cols: () -> DataFrame
+  end
+end
